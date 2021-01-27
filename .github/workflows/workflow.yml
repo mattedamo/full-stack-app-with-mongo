@@ -1,0 +1,31 @@
+name: create-images
+
+on:
+  push:
+    branches: 
+      - 'master'
+
+jobs:
+  push-images:
+    name: Push images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v1
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+        
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+  
+        with:
+          push: true
+          context: .
+          file: ./Dockerfile
+          tags: ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_BACKEND_REPO}}:${{ github.sha }}-${{steps.branch-img-not-master.outputs.branch-tag}}, ${{ secrets.DOCKER_USERNAME }}/${{secrets.DOCKER_BACKEND_REPO}}:latest-${{steps.branch-img-not-master.outputs.branch-tag}}

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: node-deployment
+  labels:
+    app: node-deployment
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-pod
+
+  template:
+    metadata:
+      name: node-pod
+      labels:
+        app: node-pod
+
+    spec:
+      containers:
+        - name: blog-node-container
+          image: backendvm
+          ports:
+            - containerPort: 3000
