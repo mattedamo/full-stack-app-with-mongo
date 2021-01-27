@@ -22,6 +22,6 @@ spec:
     spec:
       containers:
         - name: blog-node-container
-          image: backendvm
+          image: mattedamo26/backendvm
           ports:
             - containerPort: 3000
