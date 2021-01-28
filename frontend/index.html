@@ -7,7 +7,9 @@
 </head>
 
 <body>
-
+<h1> Thesis Application Frontend </h1>
+<div id="GetResult">
+</div>
 </body>
 <script>
     $(document).ready(() => {
@@ -19,7 +21,7 @@
                 "Content-Type": undefined
             },
             success: (result) => {
-                console.log(result)
+                $("#GetResult").html(result).show()
             },
             error: (err) => {
                 console.log(err)
