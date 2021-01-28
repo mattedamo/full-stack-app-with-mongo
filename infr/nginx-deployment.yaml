@@ -22,6 +22,6 @@ spec:
     spec:
       containers:
         - name: frontend-container
-          image: frontendvm
+          image: mattedamo26/frontendvm
           ports:
             - containerPort: 80 
